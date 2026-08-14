@@ -15,36 +15,65 @@ document.addEventListener("DOMContentLoaded", () => {
   if (navToggle && navMenu) {
 
     navToggle.addEventListener("click", () => {
-
       const active = navMenu.classList.toggle("active");
 
       navToggle.setAttribute(
         "aria-expanded",
         active ? "true" : "false"
       );
-
     });
 
     navMenu.querySelectorAll("a").forEach(link => {
-
       link.addEventListener("click", () => {
-
         navMenu.classList.remove("active");
 
         navToggle.setAttribute(
           "aria-expanded",
           "false"
         );
-
       });
-
     });
-
   }
 
 
   /* ==========================================================
-     NAVBAR SCROLL EFFECT
+     SCROLL PROGRESS BAR
+     ========================================================== */
+
+  const progressBar = document.createElement("div");
+
+  progressBar.className = "scroll-progress";
+
+  document.body.appendChild(progressBar);
+
+  const updateProgress = () => {
+
+    const scrollTop =
+      window.scrollY || document.documentElement.scrollTop;
+
+    const scrollHeight =
+      document.documentElement.scrollHeight -
+      window.innerHeight;
+
+    const progress =
+      scrollHeight > 0
+        ? (scrollTop / scrollHeight) * 100
+        : 0;
+
+    progressBar.style.width = `${progress}%`;
+  };
+
+  updateProgress();
+
+  window.addEventListener(
+    "scroll",
+    updateProgress,
+    { passive: true }
+  );
+
+
+  /* ==========================================================
+     NAVBAR SCROLL
      ========================================================== */
 
   const handleNavbar = () => {
@@ -52,15 +81,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!navbar) return;
 
     if (window.scrollY > 30) {
-
       navbar.classList.add("navbar-scrolled");
-
     } else {
-
       navbar.classList.remove("navbar-scrolled");
-
     }
-
   };
 
   handleNavbar();
@@ -114,7 +138,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 220);
 
     }, 2300);
-
   }
 
 
@@ -144,7 +167,6 @@ document.addEventListener("DOMContentLoaded", () => {
               revealObserver.unobserve(
                 entry.target
               );
-
             }
 
           });
@@ -167,18 +189,15 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
 
     revealElements.forEach(element => {
-
       element.classList.add(
         "reveal-visible"
       );
-
     });
-
   }
 
 
   /* ==========================================================
-     PREMIUM CARD MOUSE TILT
+     PREMIUM CARD TILT
      ========================================================== */
 
   const tiltCards =
@@ -225,21 +244,17 @@ document.addEventListener("DOMContentLoaded", () => {
              rotateX(${rotateX}deg)
              rotateY(${rotateY}deg)
              translateY(-6px)`;
-
         }
       );
 
       card.addEventListener(
         "mouseleave",
         () => {
-
           card.style.transform = "";
-
         }
       );
 
     });
-
   }
 
 
@@ -292,16 +307,14 @@ document.addEventListener("DOMContentLoaded", () => {
       requestAnimationFrame(
         animateGlow
       );
-
     };
 
     animateGlow();
-
   }
 
 
   /* ==========================================================
-     ACTIVE SECTION NAVIGATION
+     ACTIVE NAVIGATION
      ========================================================== */
 
   const sections =
@@ -330,9 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
               return;
 
             const id =
-              entry.target.getAttribute(
-                "id"
-              );
+              entry.target.getAttribute("id");
 
             navLinks.forEach(link => {
 
@@ -348,11 +359,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 link.classList.add(
                   "active"
                 );
-
               }
-
             });
-
           });
 
         },
@@ -363,11 +371,8 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
     sections.forEach(section => {
-
       sectionObserver.observe(section);
-
     });
-
   }
 
 
@@ -418,52 +423,13 @@ document.addEventListener("DOMContentLoaded", () => {
             top: position,
             behavior: "smooth"
           });
-
         }
       );
-
     });
 
 
   /* ==========================================================
-     IMAGE ERROR FALLBACK
-     ========================================================== */
-
-  const profileImg =
-    document.getElementById(
-      "profileImg"
-    );
-
-  if (profileImg) {
-
-    profileImg.addEventListener(
-      "error",
-      () => {
-
-        profileImg.style.display =
-          "none";
-
-        const ring =
-          profileImg.closest(
-            ".image-ring"
-          );
-
-        if (ring) {
-
-          ring.classList.add(
-            "image-missing"
-          );
-
-        }
-
-      }
-    );
-
-  }
-
-
-  /* ==========================================================
-     MAGNETIC BUTTON EFFECT
+     MAGNETIC BUTTONS
      ========================================================== */
 
   if (!isTouchDevice) {
@@ -497,26 +463,54 @@ document.addEventListener("DOMContentLoaded", () => {
               ${x * 0.08}px,
               ${y * 0.08}px
             )`;
-
         }
       );
 
       button.addEventListener(
         "mouseleave",
         () => {
-
           button.style.transform = "";
-
         }
       );
-
     });
-
   }
 
 
   /* ==========================================================
-     KEYBOARD ACCESSIBILITY
+     PROFILE IMAGE FALLBACK
+     ========================================================== */
+
+  const profileImg =
+    document.getElementById(
+      "profileImg"
+    );
+
+  if (profileImg) {
+
+    profileImg.addEventListener(
+      "error",
+      () => {
+
+        profileImg.style.display =
+          "none";
+
+        const ring =
+          profileImg.closest(
+            ".image-ring"
+          );
+
+        if (ring) {
+          ring.classList.add(
+            "image-missing"
+          );
+        }
+      }
+    );
+  }
+
+
+  /* ==========================================================
+     ESCAPE MOBILE MENU
      ========================================================== */
 
   document.addEventListener(
@@ -537,15 +531,13 @@ document.addEventListener("DOMContentLoaded", () => {
           "aria-expanded",
           "false"
         );
-
       }
-
     }
   );
 
 
   /* ==========================================================
-     PREMIUM PAGE READY
+     PAGE READY
      ========================================================== */
 
   document.body.classList.add(

@@ -3152,3 +3152,150 @@ button:focus-visible {
   }
 
 }
+/* ============================================================
+   PREMIUM SCROLL PROGRESS
+   ============================================================ */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  z-index: 99999;
+
+  width: 0;
+  height: 2px;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--cyan),
+      var(--blue),
+      var(--violet)
+    );
+
+  box-shadow:
+    0 0 12px rgba(103,232,249,.65),
+    0 0 25px rgba(139,92,246,.3);
+
+  transition:
+    width .08s linear;
+}
+
+
+/* ============================================================
+   PREMIUM PAGE TRANSITION
+   ============================================================ */
+
+body.portfolio-ready {
+  animation:
+    pageReveal .65s ease both;
+}
+
+@keyframes pageReveal {
+
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+
+}
+
+
+/* ============================================================
+   PREMIUM LINK SHINE
+   ============================================================ */
+
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 70%;
+  height: 100%;
+
+  transform:
+    skewX(-20deg);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.4),
+      transparent
+    );
+
+  transition:
+    left .7s ease;
+}
+
+.btn-primary:hover::before {
+  left: 140%;
+}
+
+
+/* ============================================================
+   PREMIUM TIMELINE GLOW
+   ============================================================ */
+
+.timeline-dot {
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+.timeline-item:hover .timeline-dot {
+  transform:
+    scale(1.15);
+
+  box-shadow:
+    0 0 18px rgba(103,232,249,.8),
+    0 0 40px rgba(56,189,248,.25);
+}
+
+
+/* ============================================================
+   PREMIUM IMAGE HOVER
+   ============================================================ */
+
+.image-ring {
+  transition:
+    transform .5s ease,
+    box-shadow .5s ease;
+}
+
+.image-ring:hover {
+  transform:
+    scale(1.025);
+
+  box-shadow:
+    0 0 100px rgba(56,189,248,.18),
+    0 0 160px rgba(139,92,246,.08),
+    var(--shadow-heavy);
+}
+
+
+/* ============================================================
+   MOBILE PROGRESS
+   ============================================================ */
+
+@media (max-width:760px) {
+
+  .scroll-progress {
+    height: 2px;
+  }
+
+}
