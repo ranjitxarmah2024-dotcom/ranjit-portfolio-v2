@@ -812,7 +812,68 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
   );
+/* ==========================================================
+   BACK TO TOP
+   ========================================================== */
 
+const backToTop =
+  document.createElement("button");
+
+backToTop.className =
+  "back-to-top";
+
+backToTop.type =
+  "button";
+
+backToTop.setAttribute(
+  "aria-label",
+  "Back to top"
+);
+
+backToTop.innerHTML =
+  '<i class="fa-solid fa-arrow-up"></i>';
+
+document.body.appendChild(
+  backToTop
+);
+
+const updateBackToTop = () => {
+
+  if (window.scrollY > 600) {
+
+    backToTop.classList.add(
+      "visible"
+    );
+
+  } else {
+
+    backToTop.classList.remove(
+      "visible"
+    );
+
+  }
+
+};
+
+updateBackToTop();
+
+window.addEventListener(
+  "scroll",
+  updateBackToTop,
+  { passive: true }
+);
+
+backToTop.addEventListener(
+  "click",
+  () => {
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+);
 
   /* ==========================================================
      PAGE READY
