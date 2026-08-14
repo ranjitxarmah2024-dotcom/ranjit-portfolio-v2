@@ -2922,3 +2922,233 @@ ul {
       none;
   }
 }
+/* ============================================================
+   PREMIUM ATMOSPHERIC BACKGROUND
+   ============================================================ */
+
+body {
+  position: relative;
+}
+
+.premium-cursor-glow {
+  position: fixed;
+  z-index: -1;
+
+  width: 300px;
+  height: 300px;
+
+  pointer-events: none;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(103,232,249,.065) 0%,
+      rgba(56,189,248,.025) 35%,
+      transparent 70%
+    );
+
+  filter: blur(10px);
+
+  will-change: transform;
+}
+
+body.portfolio-ready::before {
+  animation:
+    backgroundDrift 18s ease-in-out infinite alternate;
+}
+
+@keyframes backgroundDrift {
+
+  0% {
+    transform:
+      translate3d(0,0,0);
+  }
+
+  50% {
+    transform:
+      translate3d(25px,-15px,0);
+  }
+
+  100% {
+    transform:
+      translate3d(-15px,20px,0);
+  }
+
+}
+
+
+/* ============================================================
+   PREMIUM CARD LIGHT
+   ============================================================ */
+
+.project-card::before,
+.skill-card::before,
+.metric-card::before,
+.timeline-content::before,
+.highlight-item::before,
+.contact-card::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  top: -100px;
+  left: -100px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(103,232,249,.09),
+      transparent 70%
+    );
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition:
+    opacity .35s ease;
+
+}
+
+.project-card:hover::before,
+.skill-card:hover::before,
+.metric-card:hover::before,
+.timeline-content:hover::before,
+.highlight-item:hover::before,
+.contact-card:hover::before {
+
+  opacity: 1;
+
+}
+
+
+/* ============================================================
+   PREMIUM SECTION GLOW
+   ============================================================ */
+
+.section::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  right: -300px;
+  top: 15%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(139,92,246,.035),
+      transparent 70%
+    );
+
+  pointer-events: none;
+
+}
+
+
+/* ============================================================
+   PREMIUM TEXT SELECTION
+   ============================================================ */
+
+::selection {
+
+  color: #041016;
+
+  background:
+    var(--cyan);
+
+}
+
+
+/* ============================================================
+   PREMIUM SCROLLBAR
+   ============================================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background:
+    #05070d;
+}
+
+::-webkit-scrollbar-thumb {
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      var(--cyan),
+      var(--violet)
+    );
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+
+  background:
+    linear-gradient(
+      to bottom,
+      #a5f3fc,
+      #a78bfa
+    );
+
+}
+
+
+/* ============================================================
+   PREMIUM FOCUS STATES
+   ============================================================ */
+
+a:focus-visible,
+button:focus-visible {
+
+  outline:
+    2px solid var(--cyan);
+
+  outline-offset:
+    4px;
+
+}
+
+
+/* ============================================================
+   MOBILE — DISABLE CURSOR ATMOSPHERE
+   ============================================================ */
+
+@media (hover: none), (max-width: 760px) {
+
+  .premium-cursor-glow {
+    display: none;
+  }
+
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  body.portfolio-ready::before {
+    animation: none;
+  }
+
+}
