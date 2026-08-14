@@ -3985,3 +3985,222 @@ body:not(.site-loaded) {
   }
 
 }
+/* ============================================================
+   PREMIUM PROFILE IMAGE — EXECUTIVE PORTRAIT
+   ============================================================ */
+
+.hero-image-container {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-image-wrap {
+  position: relative;
+  z-index: 3;
+  padding: 10px;
+}
+
+.image-ring {
+  position: relative;
+  overflow: hidden;
+
+  border: 1px solid rgba(103, 232, 249, 0.32);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(103, 232, 249, 0.12),
+      rgba(139, 92, 246, 0.08),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,.035),
+    0 25px 80px rgba(0,0,0,.5),
+    0 0 70px rgba(56,189,248,.10);
+
+  transition:
+    transform .5s cubic-bezier(.2,.8,.2,1),
+    box-shadow .5s ease;
+}
+
+.image-ring::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: 2;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(103,232,249,.10),
+      transparent 35%,
+      transparent 65%,
+      rgba(139,92,246,.08)
+    );
+
+  mix-blend-mode: screen;
+}
+
+.image-ring::after {
+  content: "";
+
+  position: absolute;
+
+  width: 160%;
+  height: 35%;
+
+  left: -30%;
+  top: -20%;
+
+  z-index: 3;
+
+  pointer-events: none;
+
+  transform:
+    rotate(-25deg);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.10),
+      transparent
+    );
+
+  animation:
+    portraitShine 6s ease-in-out infinite;
+}
+
+.image-ring img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  object-position: center top;
+
+  filter:
+    saturate(1.04)
+    contrast(1.03)
+    brightness(.98);
+
+  transform:
+    scale(1.015);
+
+  transition:
+    transform .7s cubic-bezier(.2,.8,.2,1),
+    filter .5s ease;
+}
+
+.image-ring:hover {
+  transform:
+    translateY(-7px)
+    scale(1.015);
+
+  box-shadow:
+    0 35px 100px rgba(0,0,0,.55),
+    0 0 90px rgba(56,189,248,.15),
+    0 0 150px rgba(139,92,246,.07);
+}
+
+.image-ring:hover img {
+  transform:
+    scale(1.045);
+
+  filter:
+    saturate(1.08)
+    contrast(1.05)
+    brightness(1.02);
+}
+
+@keyframes portraitShine {
+
+  0%,
+  55% {
+    transform:
+      translateX(-80%)
+      rotate(-25deg);
+
+    opacity: 0;
+  }
+
+  65% {
+    opacity: 1;
+  }
+
+  78%,
+  100% {
+    transform:
+      translateX(80%)
+      rotate(-25deg);
+
+    opacity: 0;
+  }
+
+}
+
+
+/* ============================================================
+   PREMIUM ORBIT LIGHTS
+   ============================================================ */
+
+.hero-image-container::before {
+  content: "";
+
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  left: 50%;
+  top: 50%;
+
+  transform:
+    translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(56,189,248,.11) 0%,
+      rgba(139,92,246,.055) 35%,
+      transparent 70%
+    );
+
+  filter:
+    blur(12px);
+
+  z-index: -2;
+
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   MOBILE PHOTO
+   ============================================================ */
+
+@media (max-width: 760px) {
+
+  .hero-image-container::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  .image-ring:hover {
+    transform: none;
+  }
+
+  .image-ring:hover img {
+    transform: scale(1.015);
+  }
+
+}
