@@ -4692,3 +4692,562 @@ body:not(.site-loaded) {
   }
 
 }
+/* ============================================================
+   FINAL PREMIUM VISUAL POLISH
+   ============================================================ */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* ============================================================
+   PREMIUM SECTION TRANSITIONS
+   ============================================================ */
+
+.section {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-header {
+  position: relative;
+  z-index: 2;
+}
+
+.section-tag {
+  transition:
+    color .3s ease,
+    letter-spacing .3s ease;
+}
+
+.section-header:hover .section-tag {
+  letter-spacing: .16em;
+  color: var(--cyan);
+}
+
+.section-title {
+  text-wrap: balance;
+}
+
+.section-intro {
+  max-width: 720px;
+}
+
+
+/* ============================================================
+   HERO TYPOGRAPHY
+   ============================================================ */
+
+.hero-title {
+  text-wrap: balance;
+  letter-spacing: -.055em;
+}
+
+.hero-title span {
+  background:
+    linear-gradient(
+      110deg,
+      #ffffff 0%,
+      var(--cyan) 45%,
+      #8b5cf6 100%
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-subtitle {
+  text-wrap: balance;
+}
+
+.rotating-word {
+  display: inline-block;
+
+  color: var(--cyan);
+
+  transition:
+    opacity .22s ease,
+    transform .22s ease;
+}
+
+.hero-description {
+  text-wrap: pretty;
+}
+
+
+/* ============================================================
+   HERO BADGE
+   ============================================================ */
+
+.hero-badge {
+  border-color:
+    rgba(103,232,249,.16);
+
+  background:
+    rgba(103,232,249,.035);
+
+  box-shadow:
+    inset 0 0 20px rgba(103,232,249,.018);
+
+  transition:
+    border-color .3s ease,
+    background .3s ease,
+    transform .3s ease;
+}
+
+.hero-badge:hover {
+  border-color:
+    rgba(103,232,249,.35);
+
+  background:
+    rgba(103,232,249,.065);
+
+  transform:
+    translateY(-2px);
+}
+
+.badge-dot {
+  box-shadow:
+    0 0 12px var(--cyan);
+}
+
+
+/* ============================================================
+   HERO BUTTONS
+   ============================================================ */
+
+.hero-actions .btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-actions .btn::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 70%;
+  height: 100%;
+
+  transform: skewX(-22deg);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.18),
+      transparent
+    );
+
+  transition:
+    left .7s ease;
+
+  pointer-events: none;
+}
+
+.hero-actions .btn:hover::after {
+  left: 140%;
+}
+
+
+/* ============================================================
+   SOCIAL ICONS
+   ============================================================ */
+
+.hero-socials a {
+  transition:
+    transform .3s ease,
+    color .3s ease,
+    border-color .3s ease,
+    background .3s ease;
+}
+
+.hero-socials a:hover {
+  transform:
+    translateY(-4px);
+
+  color:
+    var(--cyan);
+
+  border-color:
+    rgba(103,232,249,.35);
+
+  background:
+    rgba(103,232,249,.055);
+}
+
+
+/* ============================================================
+   FLOATING HERO CARDS
+   ============================================================ */
+
+.floating-card {
+  transition:
+    transform .35s ease,
+    border-color .35s ease,
+    box-shadow .35s ease;
+}
+
+.floating-card:hover {
+  transform:
+    translateY(-5px);
+
+  border-color:
+    rgba(103,232,249,.28);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.4),
+    0 0 30px rgba(103,232,249,.07);
+}
+
+.floating-icon {
+  transition:
+    transform .3s ease;
+}
+
+.floating-card:hover .floating-icon {
+  transform:
+    scale(1.08);
+}
+
+
+/* ============================================================
+   METRIC CARDS
+   ============================================================ */
+
+.grid-metrics {
+  position: relative;
+}
+
+.metric-card {
+  backdrop-filter:
+    blur(12px);
+
+  -webkit-backdrop-filter:
+    blur(12px);
+}
+
+.metric-icon {
+  transition:
+    transform .3s ease,
+    color .3s ease;
+}
+
+.metric-card:hover .metric-icon {
+  transform:
+    translateY(-3px);
+
+  color:
+    var(--cyan);
+}
+
+.metric-label {
+  line-height:
+    1.55;
+}
+
+
+/* ============================================================
+   ABOUT TEXT
+   ============================================================ */
+
+.about-text p {
+  text-wrap: pretty;
+}
+
+.about-text strong {
+  color:
+    rgba(255,255,255,.94);
+
+  font-weight:
+    700;
+}
+
+
+/* ============================================================
+   EXPERIENCE
+   ============================================================ */
+
+.timeline {
+  position: relative;
+}
+
+.timeline-content {
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline-content::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 2px;
+  height: 0;
+
+  background:
+    linear-gradient(
+      to bottom,
+      var(--cyan),
+      transparent
+    );
+
+  transition:
+    height .6s ease;
+
+  pointer-events: none;
+}
+
+.timeline-item:hover
+.timeline-content::after {
+  height: 100%;
+}
+
+.role-title {
+  text-wrap: balance;
+}
+
+.company-name {
+  transition:
+    color .3s ease;
+}
+
+.timeline-content:hover
+.company-name {
+  color:
+    var(--cyan);
+}
+
+.timeline-date {
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   EXPERIENCE LIST
+   ============================================================ */
+
+.timeline-list li {
+  text-wrap: pretty;
+}
+
+.timeline-list li strong {
+  color:
+    rgba(255,255,255,.94);
+}
+
+.experience-tools {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* ============================================================
+   PROJECT DESCRIPTION
+   ============================================================ */
+
+.project-desc {
+  text-wrap: pretty;
+  line-height: 1.8;
+}
+
+.project-subtitle {
+  transition:
+    color .3s ease;
+}
+
+.project-card:hover
+.project-subtitle {
+  color:
+    rgba(103,232,249,.8);
+}
+
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+
+.contact-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-panel::before {
+  content: "";
+
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  right: -300px;
+  top: -300px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(103,232,249,.065),
+      transparent 70%
+    );
+
+  pointer-events: none;
+}
+
+.contact-card strong {
+  transition:
+    color .3s ease;
+}
+
+.contact-card:hover strong {
+  color:
+    var(--cyan);
+}
+
+.contact-arrow {
+  transition:
+    transform .3s ease;
+}
+
+.contact-card:hover .contact-arrow {
+  transform:
+    translate(3px,-3px);
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.footer {
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,.012),
+      transparent
+    );
+}
+
+
+/* ============================================================
+   REVEAL ANIMATION
+   ============================================================ */
+
+.reveal {
+  opacity: 0;
+  transform:
+    translateY(24px);
+
+  transition:
+    opacity .7s ease,
+    transform .7s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform:
+    translateY(0);
+}
+
+.timeline-item:nth-child(2),
+.project-card:nth-child(2),
+.skill-card:nth-child(2) {
+  transition-delay: .05s;
+}
+
+.timeline-item:nth-child(3),
+.project-card:nth-child(3),
+.skill-card:nth-child(3) {
+  transition-delay: .1s;
+}
+
+.project-card:nth-child(4),
+.skill-card:nth-child(4) {
+  transition-delay: .15s;
+}
+
+
+/* ============================================================
+   MOBILE PREMIUM POLISH
+   ============================================================ */
+
+@media (max-width: 760px) {
+
+  html {
+    scroll-padding-top: 75px;
+  }
+
+  .hero-title {
+    letter-spacing:
+      -.045em;
+  }
+
+  .section-title {
+    letter-spacing:
+      -.035em;
+  }
+
+  .timeline-date {
+    white-space:
+      normal;
+  }
+
+  .floating-card {
+    transform:
+      scale(.9);
+  }
+
+  .hero-socials {
+    gap: 8px;
+  }
+
+  .hero-actions {
+    width: 100%;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+}
+
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+}
