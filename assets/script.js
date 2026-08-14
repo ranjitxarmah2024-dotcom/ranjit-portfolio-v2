@@ -1,192 +1,621 @@
-/* =========================================================
-   PREMIUM INTERACTION ENGINE
-   Ranjit Sharma Portfolio 2.0
-========================================================= */
+/* ============================================================
+   RANJIT SHARMA — PREMIUM PORTFOLIO INTERACTION SYSTEM
+   ============================================================ */
 
-document.addEventListener('DOMContentLoaded', () => {
+"use strict";
 
-    // 1. MOUSE GLOW EFFECT (GLOBAL)
-    const body = document.body;
-    window.addEventListener('mousemove', (e) => {
-        body.style.setProperty('--mouse-x', `${e.clientX}px`);
-        body.style.setProperty('--mouse-y', `${e.clientY}px`);
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* ==========================================================
+     MOBILE NAVIGATION
+     ========================================================== */
+
+  const navToggle = document.getElementById("navToggle");
+  const navMenu = document.getElementById("navMenu");
+
+  if (navToggle && navMenu) {
+
+    navToggle.addEventListener("click", () => {
+
+      const isOpen = navMenu.classList.toggle("active");
+
+      navToggle.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+
     });
 
 
-    // 2. HERO TEXT ROTATOR
-    const rotatingWord = document.querySelector('.rotating-word');
-    if (rotatingWord) {
-        const words = JSON.parse(rotatingWord.getAttribute('data-words'));
-        let currentIndex = 0;
+    navMenu.querySelectorAll("a").forEach((link) => {
 
-        setInterval(() => {
-            rotatingWord.classList.add('word-exit');
-            
-            setTimeout(() => {
-                currentIndex = (currentIndex + 1) % words.length;
-                rotatingWord.textContent = words[currentIndex];
-                rotatingWord.classList.remove('word-exit');
-                rotatingWord.classList.add('word-enter');
-                
-                setTimeout(() => {
-                    rotatingWord.classList.remove('word-enter');
-                }, 450);
-            }, 300);
-        }, 3500);
-    }
+      link.addEventListener("click", () => {
 
+        navMenu.classList.remove("active");
 
-    // 3. PROJECT SPOTLIGHT EFFECT
-    const spotlightCards = document.querySelectorAll('.project-card, .building-card');
-    spotlightCards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            card.style.setProperty('--spot-x', `${x}px`);
-            card.style.setProperty('--spot-y', `${y}px`);
-        });
+        navToggle.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+      });
+
     });
 
+  }
 
-    // 4. SCROLL REVEAL SYSTEM
-    const revealElements = document.querySelectorAll('section, .impact-card, .timeline-item, .skill-group, .project-card, .profile-link-card');
-    revealElements.forEach(el => el.classList.add('reveal'));
 
-    const revealOnScroll = () => {
-        const triggerBottom = window.innerHeight * 0.85;
-        revealElements.forEach(el => {
-            const elTop = el.getBoundingClientRect().top;
-            if (elTop < triggerBottom) {
-                el.classList.add('visible');
-            }
-        });
+  /* ==========================================================
+     ROTATING HERO TEXT
+     ========================================================== */
+
+  const rotatingWord =
+    document.getElementById("rotatingWord");
+
+  if (rotatingWord) {
+
+    const words = [
+      "Customer Success",
+      "Business Development",
+      "Sales Leadership",
+      "VIP Account Management",
+      "Gaming Operations",
+      "Team Leadership",
+      "AI & Automation",
+      "Product Building"
+    ];
+
+    let index = 0;
+
+    setInterval(() => {
+
+      rotatingWord.style.opacity = "0";
+      rotatingWord.style.transform = "translateY(8px)";
+
+      setTimeout(() => {
+
+        index = (index + 1) % words.length;
+
+        rotatingWord.textContent =
+          words[index];
+
+        rotatingWord.style.opacity = "1";
+        rotatingWord.style.transform =
+          "translateY(0)";
+
+      }, 220);
+
+    }, 2600);
+
+    rotatingWord.style.transition =
+      "opacity 220ms ease, transform 220ms ease";
+
+  }
+
+
+  /* ==========================================================
+     NAVBAR SCROLL EFFECT
+     ========================================================== */
+
+  const navbar =
+    document.getElementById("navbar");
+
+  if (navbar) {
+
+    const updateNavbar = () => {
+
+      if (window.scrollY > 25) {
+
+        navbar.classList.add("navbar-scrolled");
+
+      } else {
+
+        navbar.classList.remove("navbar-scrolled");
+
+      }
+
     };
 
-    window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll(); // Initial check
+    updateNavbar();
+
+    window.addEventListener(
+      "scroll",
+      updateNavbar,
+      { passive: true }
+    );
+
+  }
 
 
-    // 5. TIMELINE PROGRESS TRACKER
-    const timeline = document.querySelector('.timeline');
-    if (timeline) {
-        const progress = document.createElement('div');
-        progress.className = 'timeline-progress';
-        timeline.appendChild(progress);
+  /* ==========================================================
+     ACTIVE NAVIGATION LINK
+     ========================================================== */
 
-        window.addEventListener('scroll', () => {
-            const rect = timeline.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-            
-            if (rect.top < windowHeight && rect.bottom > 0) {
-                const totalHeight = rect.height;
-                const visibleHeight = windowHeight - rect.top;
-                const progressPercentage = Math.min(Math.max((visibleHeight / totalHeight) * 100, 0), 100);
-                progress.style.height = `${progressPercentage}%`;
+  const navLinks =
+    document.querySelectorAll(".nav-link");
+
+  const sections =
+    document.querySelectorAll("main section[id]");
+
+  if (navLinks.length && sections.length) {
+
+    const sectionObserver =
+      new IntersectionObserver(
+        (entries) => {
+
+          entries.forEach((entry) => {
+
+            if (!entry.isIntersecting) {
+              return;
             }
-        });
-    }
 
+            navLinks.forEach((link) => {
 
-    // 6. PREMIUM NAV & ACTIVE STATE
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('nav a');
-    const header = document.querySelector('header');
-    const menuToggle = document.getElementById('menuToggle');
-    const mainNav = document.getElementById('mainNav');
+              link.classList.remove("active");
 
-    if (menuToggle && mainNav) {
-        menuToggle.addEventListener('click', () => {
-            mainNav.classList.toggle('mobile-open');
-            menuToggle.innerHTML = mainNav.classList.contains('mobile-open') 
-                ? '<i class="fas fa-xmark"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        });
+              const target =
+                link.getAttribute("href");
 
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mainNav.classList.remove('mobile-open');
-                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+              if (
+                target === `#${entry.target.id}`
+              ) {
+
+                link.classList.add("active");
+
+              }
+
             });
-        });
-    }
 
-    window.addEventListener('scroll', () => {
-        // Header background transition
-        if (window.scrollY > 50) {
-            header.style.background = "rgba(5, 11, 20, 0.92)";
-            header.style.boxShadow = "0 10px 40px rgba(0,0,0,0.3)";
+          });
+
+        },
+        {
+          rootMargin: "-35% 0px -55% 0px"
+        }
+      );
+
+    sections.forEach((section) => {
+      sectionObserver.observe(section);
+    });
+
+  }
+
+
+  /* ==========================================================
+     SCROLL REVEAL
+     ========================================================== */
+
+  const revealElements = document.querySelectorAll(
+    ".metric-card, " +
+    ".highlight-item, " +
+    ".timeline-item, " +
+    ".skill-card, " +
+    ".project-card, " +
+    ".contact-card"
+  );
+
+  if (
+    revealElements.length &&
+    !window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches
+  ) {
+
+    revealElements.forEach((element) => {
+
+      element.classList.add("reveal");
+
+    });
+
+
+    const revealObserver =
+      new IntersectionObserver(
+        (entries, observer) => {
+
+          entries.forEach((entry) => {
+
+            if (!entry.isIntersecting) {
+              return;
+            }
+
+            entry.target.classList.add(
+              "reveal-visible"
+            );
+
+            observer.unobserve(entry.target);
+
+          });
+
+        },
+        {
+          threshold: 0.08,
+          rootMargin: "0px 0px -50px 0px"
+        }
+      );
+
+
+    revealElements.forEach((element) => {
+
+      revealObserver.observe(element);
+
+    });
+
+  }
+
+
+  /* ==========================================================
+     METRIC COUNTERS
+     ========================================================== */
+
+  const metricNumbers =
+    document.querySelectorAll(".metric-number");
+
+  if (
+    metricNumbers.length &&
+    !window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches
+  ) {
+
+    const animateMetric = (element) => {
+
+      if (element.dataset.animated === "true") {
+        return;
+      }
+
+      element.dataset.animated = "true";
+
+      const original =
+        element.textContent.trim();
+
+      const match =
+        original.match(/^([\d.]+)(.*)$/);
+
+      if (!match) {
+        return;
+      }
+
+      const target =
+        parseFloat(match[1]);
+
+      const suffix =
+        match[2];
+
+      const hasDecimal =
+        match[1].includes(".");
+
+      const duration = 1300;
+
+      const start =
+        performance.now();
+
+      const easeOut = (value) =>
+        1 - Math.pow(1 - value, 3);
+
+
+      const frame = (now) => {
+
+        const progress =
+          Math.min(
+            (now - start) / duration,
+            1
+          );
+
+        const value =
+          target * easeOut(progress);
+
+        element.textContent =
+          `${hasDecimal
+            ? value.toFixed(1)
+            : Math.floor(value)
+          }${suffix}`;
+
+
+        if (progress < 1) {
+
+          requestAnimationFrame(frame);
+
         } else {
-            header.style.background = "rgba(5, 11, 20, 0.78)";
-            header.style.boxShadow = "none";
+
+          element.textContent =
+            original;
+
         }
 
-        // Active link tracking
-        let current = "";
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (scrollY >= sectionTop - 120) {
-                current = section.getAttribute('id');
-            }
-        });
+      };
 
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').includes(current)) {
-                link.classList.add('active');
-            }
-        });
-    });
+      requestAnimationFrame(frame);
 
-
-    // 7. COUNTER ANIMATION
-    const counters = document.querySelectorAll('.impact-card strong');
-    const animateCounters = () => {
-        counters.forEach(counter => {
-            const target = parseFloat(counter.innerText.replace(/[^0-9.]/g, ''));
-            const suffix = counter.innerText.replace(/[0-9.]/g, '');
-            let count = 0;
-            const speed = 2000 / target;
-
-            const updateCount = () => {
-                const increment = target / 100;
-                if (count < target) {
-                    count += increment;
-                    counter.innerText = Math.ceil(count) + suffix;
-                    setTimeout(updateCount, 1);
-                } else {
-                    counter.innerText = target + suffix;
-                }
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting) {
-                    updateCount();
-                    observer.unobserve(counter);
-                }
-            }, { threshold: 0.5 });
-
-            observer.observe(counter);
-        });
     };
-    animateCounters();
 
 
-    // 8. SMOOTH SCROLLING (ENHANCED)
-    navLinks.forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const targetId = this.getAttribute('href');
-            if (targetId.startsWith('#')) {
-                e.preventDefault();
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 70,
-                        behavior: 'smooth'
-                    });
-                }
+    const metricObserver =
+      new IntersectionObserver(
+        (entries, observer) => {
+
+          entries.forEach((entry) => {
+
+            if (!entry.isIntersecting) {
+              return;
             }
-        });
+
+            animateMetric(entry.target);
+
+            observer.unobserve(entry.target);
+
+          });
+
+        },
+        {
+          threshold: 0.6
+        }
+      );
+
+
+    metricNumbers.forEach((metric) => {
+
+      metricObserver.observe(metric);
+
     });
+
+  }
+
+
+  /* ==========================================================
+     SMOOTH ANCHOR SCROLLING
+     ========================================================== */
+
+  document
+    .querySelectorAll('a[href^="#"]')
+    .forEach((link) => {
+
+      link.addEventListener("click", (event) => {
+
+        const targetId =
+          link.getAttribute("href");
+
+        if (
+          !targetId ||
+          targetId === "#"
+        ) {
+          return;
+        }
+
+        const target =
+          document.querySelector(targetId);
+
+        if (!target) {
+          return;
+        }
+
+        event.preventDefault();
+
+        const navbarHeight =
+          navbar
+            ? navbar.offsetHeight
+            : 0;
+
+        const targetPosition =
+          target.getBoundingClientRect().top +
+          window.scrollY -
+          navbarHeight -
+          15;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth"
+        });
+
+      });
+
+    });
+
+
+  /* ==========================================================
+     EXPERIENCE CARD MICRO-INTERACTION
+     ========================================================== */
+
+  const timelineCards =
+    document.querySelectorAll(
+      ".timeline-content"
+    );
+
+  timelineCards.forEach((card) => {
+
+    card.addEventListener(
+      "mousemove",
+      (event) => {
+
+        if (
+          window.innerWidth < 768 ||
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+        ) {
+          return;
+        }
+
+        const rect =
+          card.getBoundingClientRect();
+
+        const x =
+          event.clientX - rect.left;
+
+        const y =
+          event.clientY - rect.top;
+
+        const rotateX =
+          ((y / rect.height) - 0.5) * -2;
+
+        const rotateY =
+          ((x / rect.width) - 0.5) * 2;
+
+        card.style.transform =
+          `translateY(-5px) perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+      }
+    );
+
+
+    card.addEventListener(
+      "mouseleave",
+      () => {
+
+        card.style.transform = "";
+
+      }
+    );
+
+  });
+
+
+  /* ==========================================================
+     PROJECT CARD MICRO-INTERACTION
+     ========================================================== */
+
+  const projectCards =
+    document.querySelectorAll(
+      ".project-card"
+    );
+
+  projectCards.forEach((card) => {
+
+    card.addEventListener(
+      "mousemove",
+      (event) => {
+
+        if (
+          window.innerWidth < 768 ||
+          window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+        ) {
+          return;
+        }
+
+        const rect =
+          card.getBoundingClientRect();
+
+        const x =
+          event.clientX - rect.left;
+
+        const y =
+          event.clientY - rect.top;
+
+        const px =
+          (x / rect.width) * 100;
+
+        const py =
+          (y / rect.height) * 100;
+
+        card.style.setProperty(
+          "--mouse-x",
+          `${px}%`
+        );
+
+        card.style.setProperty(
+          "--mouse-y",
+          `${py}%`
+        );
+
+      }
+    );
+
+  });
+
+
+  /* ==========================================================
+     PROFILE IMAGE FALLBACK
+     ========================================================== */
+
+  const profileImg =
+    document.getElementById("profileImg");
+
+  if (profileImg) {
+
+    profileImg.addEventListener(
+      "error",
+      () => {
+
+        profileImg.style.opacity = "0.35";
+
+      },
+      { once: true }
+    );
+
+  }
+
+
+  /* ==========================================================
+     EXTERNAL LINKS
+     ========================================================== */
+
+  document
+    .querySelectorAll(
+      'a[href^="http"]'
+    )
+    .forEach((link) => {
+
+      link.addEventListener(
+        "click",
+        () => {
+
+          link.setAttribute(
+            "rel",
+            "noopener noreferrer"
+          );
+
+          link.setAttribute(
+            "target",
+            "_blank"
+          );
+
+        }
+      );
+
+    });
+
+
+  /* ==========================================================
+     ESC KEY — CLOSE MOBILE MENU
+     ========================================================== */
+
+  document.addEventListener(
+    "keydown",
+    (event) => {
+
+      if (event.key !== "Escape") {
+        return;
+      }
+
+      if (
+        navMenu &&
+        navMenu.classList.contains("active")
+      ) {
+
+        navMenu.classList.remove("active");
+
+        if (navToggle) {
+
+          navToggle.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+        }
+
+      }
+
+    }
+  );
+
+
+  /* ==========================================================
+     PAGE READY
+     ========================================================== */
+
+  document.documentElement.classList.add(
+    "js-ready"
+  );
 
 });
