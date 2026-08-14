@@ -3525,3 +3525,463 @@ body:not(.site-loaded) {
   }
 
 }
+/* ============================================================
+   PREMIUM PROJECT CARD SYSTEM
+   ============================================================ */
+
+.projects-grid {
+  perspective: 1200px;
+}
+
+.project-card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transform-style: preserve-3d;
+  transition:
+    transform .45s cubic-bezier(.2,.8,.2,1),
+    border-color .35s ease,
+    box-shadow .45s ease,
+    background .35s ease;
+}
+
+.project-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent 20%,
+      rgba(255,255,255,.055) 48%,
+      transparent 62%
+    );
+
+  transform:
+    translateX(-120%);
+
+  transition:
+    transform .8s ease;
+
+  z-index: -1;
+}
+
+.project-card:hover::after {
+  transform:
+    translateX(120%);
+}
+
+.project-card:hover {
+  border-color:
+    rgba(103,232,249,.28);
+
+  box-shadow:
+    0 25px 80px rgba(0,0,0,.42),
+    0 0 45px rgba(56,189,248,.07);
+}
+
+.project-title {
+  transition:
+    color .3s ease,
+    transform .3s ease;
+}
+
+.project-card:hover .project-title {
+  color:
+    var(--cyan);
+
+  transform:
+    translateX(4px);
+}
+
+.project-status {
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+.project-card:hover .project-status {
+  transform:
+    translateY(-2px);
+}
+
+.project-tech span {
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    background .25s ease;
+}
+
+.project-tech span:hover {
+  transform:
+    translateY(-3px);
+
+  border-color:
+    rgba(103,232,249,.4);
+
+  background:
+    rgba(103,232,249,.08);
+}
+
+.project-links {
+  position: relative;
+  z-index: 3;
+}
+
+.link-btn {
+  transition:
+    transform .3s ease,
+    border-color .3s ease,
+    background .3s ease;
+}
+
+.link-btn:hover {
+  border-color:
+    rgba(103,232,249,.4);
+
+  background:
+    rgba(103,232,249,.07);
+}
+
+
+/* ============================================================
+   PROJECT NUMBERING
+   ============================================================ */
+
+.project-card {
+  counter-increment:
+    project-counter;
+}
+
+.projects-grid {
+  counter-reset:
+    project-counter;
+}
+
+.project-card::before {
+  content:
+    "0" counter(project-counter);
+
+  position: absolute;
+
+  top: 22px;
+  right: 24px;
+
+  font-family:
+    var(--display);
+
+  font-size:
+    .65rem;
+
+  font-weight:
+    800;
+
+  letter-spacing:
+    .12em;
+
+  color:
+    rgba(255,255,255,.18);
+
+  pointer-events:
+    none;
+}
+
+
+/* ============================================================
+   FEATURED PROJECT
+   ============================================================ */
+
+.project-featured {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(103,232,249,.065),
+      rgba(139,92,246,.045),
+      rgba(255,255,255,.025)
+    );
+}
+
+.project-featured::before {
+  color:
+    rgba(103,232,249,.32);
+}
+
+.project-featured:hover {
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.5),
+    0 0 70px rgba(103,232,249,.1);
+}
+
+
+/* ============================================================
+   PREMIUM SKILL CARDS
+   ============================================================ */
+
+.skill-card {
+  transition:
+    transform .4s cubic-bezier(.2,.8,.2,1),
+    border-color .35s ease,
+    box-shadow .4s ease;
+}
+
+.skill-card:hover {
+  border-color:
+    rgba(103,232,249,.24);
+
+  box-shadow:
+    0 22px 65px rgba(0,0,0,.35),
+    0 0 35px rgba(56,189,248,.05);
+}
+
+.skill-card-icon {
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease;
+}
+
+.skill-card:hover .skill-card-icon {
+  transform:
+    rotate(-4deg)
+    scale(1.08);
+
+  box-shadow:
+    0 0 30px rgba(103,232,249,.12);
+}
+
+
+/* ============================================================
+   PREMIUM CONTACT CARDS
+   ============================================================ */
+
+.contact-card {
+  position: relative;
+  overflow: hidden;
+
+  transition:
+    transform .35s ease,
+    border-color .35s ease,
+    box-shadow .35s ease;
+}
+
+.contact-card::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent,
+      rgba(103,232,249,.045),
+      transparent
+    );
+
+  transform:
+    translateX(-100%);
+
+  transition:
+    transform .7s ease;
+
+  pointer-events:
+    none;
+}
+
+.contact-card:hover::before {
+  transform:
+    translateX(100%);
+}
+
+.contact-card:hover {
+  transform:
+    translateY(-5px);
+
+  border-color:
+    rgba(103,232,249,.25);
+
+  box-shadow:
+    0 20px 55px rgba(0,0,0,.32);
+}
+
+.contact-icon {
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+.contact-card:hover .contact-icon {
+  transform:
+    scale(1.08);
+
+  box-shadow:
+    0 0 28px rgba(103,232,249,.12);
+}
+
+
+/* ============================================================
+   PREMIUM HIGHLIGHTS
+   ============================================================ */
+
+.highlight-item {
+  transition:
+    transform .35s ease,
+    border-color .35s ease,
+    background .35s ease;
+}
+
+.highlight-item:hover {
+  transform:
+    translateX(6px);
+
+  border-color:
+    rgba(103,232,249,.2);
+
+  background:
+    rgba(255,255,255,.055);
+}
+
+.highlight-icon {
+  transition:
+    transform .3s ease;
+}
+
+.highlight-item:hover .highlight-icon {
+  transform:
+    scale(1.1)
+    rotate(-5deg);
+}
+
+
+/* ============================================================
+   PREMIUM EXPERIENCE CONTENT
+   ============================================================ */
+
+.timeline-content {
+  transition:
+    border-color .35s ease,
+    box-shadow .35s ease;
+}
+
+.timeline-content:hover {
+  border-color:
+    rgba(103,232,249,.2);
+
+  box-shadow:
+    0 20px 70px rgba(0,0,0,.28);
+}
+
+.timeline-list li {
+  transition:
+    transform .25s ease,
+    color .25s ease;
+}
+
+.timeline-list li:hover {
+  transform:
+    translateX(4px);
+}
+
+.timeline-list li::marker {
+  color:
+    var(--cyan);
+}
+
+
+/* ============================================================
+   PREMIUM EXPERIENCE TAGS
+   ============================================================ */
+
+.experience-tools span {
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    background .25s ease;
+}
+
+.experience-tools span:hover {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    rgba(103,232,249,.32);
+
+  background:
+    rgba(103,232,249,.06);
+}
+
+
+/* ============================================================
+   PREMIUM METRICS
+   ============================================================ */
+
+.metric-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-card::after {
+  content: "";
+
+  position: absolute;
+
+  width: 160px;
+  height: 160px;
+
+  right: -90px;
+  bottom: -90px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(103,232,249,.09),
+      transparent 70%
+    );
+
+  transition:
+    transform .5s ease;
+}
+
+.metric-card:hover::after {
+  transform:
+    scale(1.5);
+}
+
+.metric-number {
+  transition:
+    transform .35s ease,
+    text-shadow .35s ease;
+}
+
+.metric-card:hover .metric-number {
+  transform:
+    translateY(-3px);
+
+  text-shadow:
+    0 0 30px rgba(103,232,249,.25);
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 760px) {
+
+  .project-card:hover,
+  .skill-card:hover,
+  .contact-card:hover,
+  .highlight-item:hover {
+    transform: none;
+  }
+
+  .timeline-list li:hover {
+    transform: none;
+  }
+
+}
